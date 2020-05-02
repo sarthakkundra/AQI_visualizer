@@ -1,0 +1,77 @@
+<%-include ('partials/header.ejs')%>
+
+<div class="container">
+    <form action="/" method="POST">
+        <input class="input" name="city_name" type="text" placeholder="City Name">
+        <button class="btn btn-primary">Search</button>
+    </form>
+
+    <div class="chart" style="width: 400px">
+        <canvas id="chart" width="400" height="400"></canvas>
+    </div>
+
+    <% for(result of aqi_data) {%>
+    <h1>City: <%=result.city%></h1>
+    <h2>Air Quality Index : <%=result.aqi%></h2>
+    <%}%>
+    <div id='map' style='height:380px;' />
+</div>
+
+
+
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.css" />
+<script src="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+<script>
+    const ctx = document.getElementById('chart').getContext('2d');
+    const chart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['CO', 'H', 'NO2', 'O3', 'p', 'pm10', 'pm25', 'SO2', 'T', 'W'],
+            datasets: [{
+                label: 'Pollutantns',
+                data: [4.6, 54, 9.2, 46.3, 1002, 70, 137, 1.6, 26, 3.6],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+</script>
+<script>
+    var OSM_URL = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+    var OSM_ATTRIB = '&copy;  <a  href="http://openstreetmap.org/copyright">OpenStreetMap</a>  contributors';
+    var osmLayer = L.tileLayer(OSM_URL, { attribution: OSM_ATTRIB });
+
+    var WAQI_URL = "https://tiles.waqi.info/tiles/usepa-aqi/{z}/{x}/{y}.png?token=_TOKEN_ID_";
+    var WAQI_ATTR = 'Air  Quality  Tiles  &copy;  <a  href="http://waqi.info">waqi.info</a>';
+    var waqiLayer = L.tileLayer(WAQI_URL, { attribution: WAQI_ATTR });
+
+    var map = L.map('map').setView([51.505, -0.09], 2);
+    map.addLayer(osmLayer).addLayer(waqiLayer);  
+</script>
+<%-include ('partials/footer.ejs')%>
