@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-162128675-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+        
+          gtag('config', 'UA-162128675-1');
+        </script>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Covid-19 Stats Comparator</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css?family=Audiowide|Julius+Sans+One|Orbitron|Poiret+One|Quantico|Russo+One&display=swap" rel="stylesheet">
+    </head>
+    <style type="text/css">
+        @import url('./base.css');
+        @import url('./basic-grid.css');
+        .wi-75{
+            width:85%;
+        }
+        div.container-fluid div.basic-grid input{
+            background-color: rgb(22, 47, 74);
+            color:white;
+            font-family:'Quantico';
+        }
+        div.container div.basic-grid datalist{
+            background-color: rgb(22, 47, 74);
+        }
+        div.container-fluid div.basic-grid .btn{
+            background-color: rgb(12, 24, 37);
+            color:rgb(10, 150, 5);
+            font-family:'Quantico';
+            font-size:1.5rem;
+        }
+        h1.display-4{
+            color: red;
+        }
+        div.container-fluid div.basic-grid .btn:hover{
+            color:rgb(14, 248, 6);
+        }
+        #chart-container{
+            min-height:600px;
+        }
+        #cards p{
+            font-family:'Quantico';
+            font-size: 1.7rem;
+        }
+        #cards h5{
+            font-size: 3.25rem;
+        }
+        #cards small{
+            font-size: 1rem;
+        }
+        footer{
+            font-family:'Quantico';
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+        @media screen and (max-width: 768px) {
+            .wi-75{
+                width:100%;
+            }
+        }
+    </style>
+    <body>
+        <div class="container-fluid text-center pt-4">
+            <h1 class="display-4">Covid-19</h1>
+            <h2 >Track upto 5 countries</h2>
+            <form id="form-data">
+            <div class="basic-grid mt-5 wi-75 mx-auto" id="inputDiv">
+                
+                    <input type="text" class="form-control  mx-auto font-weight-bold wi-75" name="Country" placeholder="Enter Country Name..." list="country1">
+                    <datalist id="country1">
+
+                    </datalist>
+                
+                    <input type="text" class="form-control  mx-auto font-weight-bold wi-75" name="Country" placeholder="Enter Country Name..." list="country2">
+                    <datalist id="country2">
+
+                    </datalist>
+                
+            </div>
+            <div class="mt-3 basic-grid wi-75 mx-auto">
+
+                <button type="submit" class="btn btn-dark mx-auto wi-75">Compare</button>
+                <button class="btn btn-dark mx-auto wi-75 " id="add">Add More Countries</button>
+                <select class="btn btn-dark mx-auto wi-75 " id="type">
+                    <option value="Confirmed">Confirmed cases</option>
+                    <option value="Recovered">Recovered</option>
+                    <option value="Deceased">Deaths</option>
+                </select>
+
+            </div>
+            </form>
+            <div class="card mt-5 pt-5 wi-75 mx-auto" id="chart-container">
+                <canvas id="canvas"></canvas>
+                    
+            </div>
+            <div class="basic-grid mt-5" id="cards">
+
+            </div>
+    
+        </div>
+    </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+    <script src="./script.js">
+    </script>
+</html>

@@ -5,6 +5,7 @@ var request = require('request-promise');
 var request2 = require('request');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
+const path = require('path');
 
 var app = express();
 
@@ -57,6 +58,10 @@ app.get("/", function (req, res) {
         });
     });
 });
+
+app.get("/stats", (req,res) =>{
+    res.sendFile(path.join(__dirname, '/comparator/index.html'));
+})
 
 
 app.post("/", function (req, res) {

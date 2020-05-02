@@ -1,0 +1,32 @@
+
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans&display=swap');
+
+body {
+    background: white;
+    color:rgb(16, 92, 105); 
+    font-family: 'Poiret One', sans-serif;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgb(12, 24, 37);
+    font-size: 3rem;
+    color: #fff;
+    height: 100%;
+    width: 100%;
+    border-radius: 4px;
+    transition: all 500ms;
+    overflow: hidden;
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+ }
+  
+.card:hover {
+    transform: translateY(-3px) scale(1.1);
+ }
+
